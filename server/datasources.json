@@ -2,5 +2,21 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "postgres": {
+    "host": "localhost",
+    "port": 5432,
+    "url": "",
+    "database": "viewstats",
+    "password": "Vs2019",
+    "name": "postgres",
+    "user": "postgres",
+    "connector": "postgresql"
+  },
+  "photos": {
+    "name": "photos",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./common/assets"
   }
 }
