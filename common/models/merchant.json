@@ -1,0 +1,75 @@
+{
+  "name": "Merchant",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "defaultFn": "uuid",
+      "postgresql": {
+        "dataType": "uuid"
+      }
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "picturePath": {
+      "type": "string"
+    },
+    "creationDate": {
+      "type": "date"
+    },
+    "lastUpdated": {
+      "type": "date"
+    },
+    "deleted": {
+      "type": "boolean"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "push": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "object",
+          "http": {
+            "source"
+          :  "body"},
+          "required": false,
+          "description": "array de merchant"
+        }
+      ],
+      "returns": [
+        {
+        "arg" : "toUpdate",
+        "type" : "array"
+        },
+        {
+          "arg" : "toInsert",
+          "type" : "array"
+        },
+        {
+          "arg" : "lastSync",
+          "type" : "string"
+        }
+      ],
+      "description": "push for synchronization",
+      "http": [
+        {
+          "path": "/push",
+          "verb": "post"
+        }
+      ]
+    }
+  }
+}
