@@ -20,11 +20,23 @@
     "lastName": {
       "type": "string"
     },
-    "picturePath": {
+    "pictureFileName": {
       "type": "string"
     },
     "creationDate": {
       "type": "date"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "incoming": {
+      "type": "number"
+    },
+    "holidays": {
+      "type": "number"
     },
     "lastUpdated": {
       "type": "date"
@@ -56,6 +68,14 @@
         },
         {
           "arg" : "toInsert",
+          "type" : "array"
+        },
+        {
+          "arg" : "picToUpload",
+          "type" : "array"
+        },
+        {
+          "arg" : "picToDownload",
           "type" : "array"
         },
         {

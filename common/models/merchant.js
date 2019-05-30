@@ -17,6 +17,8 @@ module.exports = function(Merchant) {
     let toInsert = [];
     let clientToUpdate = [];
     let clientToInsert = [];
+    let picToUpload = [];
+    let picToDownload = [];
     let i=0;
   // On récupère la date de dernière synchro du client
       let lastSync = new Date((data.lastSync));
@@ -39,38 +41,72 @@ module.exports = function(Merchant) {
             return;
           }
           clientToInsert = value;
+          value.forEach((element)=>{
+            if(element.pictureFileName!=null)
+              picToDownload.push(element.id);
+          });
           i++;
           console.log("Objets à créer sur le client\n"+JSON.stringify(clientToInsert));
 
-          if (data.localChanges.length===0){
-            console.log("Il n'y a rien à updater, on renvoie les nouvelles entrées");
-            //Il n'y a rien à updater, on renvoie les nouvelles entrées
-            callback(null,clientToUpdate,clientToInsert,new Date().toISOString());
-            return;
-          }
+          Merchant.find({where:{updatedAt : {gt: data.lastSync}}},function (err, value){
+            if (err){
+              callback(err);
+              return;
+            }
+            value.forEach((element)=>{
+              data.localChanges.find(function(change) {
+                console.log("inclus ou pas\n"+change.id === element.id);
+                if (change.id === element.id){
+                  console.log("coucou");
+                  clientToUpdate.push(element);
+                }
+              });
+            });
+            if (data.localChanges.length===0){
+
+              console.log("Il n'y a rien à updater, on renvoie les nouvelles entrées");
+              //Il n'y a rien à updater, on renvoie les nouvelles entrées
+              callback(null,clientToUpdate,clientToInsert,picToUpload,picToDownload,new Date().toISOString());
+              return;
+            }
+
+          });
+
+
 
           data.localChanges.forEach((element,index)=>{
-
 
             Merchant.findById(element.id, function (err, merchant) {
               console.log("-------------------");
               if (err) {
                 console.log(err);
               }
+              //On cherche si un marchand existe pour cet id
               if (merchant) {
+                //Si l'élément envoyé est plus récent, on l'update dans la BDD
                 if (element.lastUpdated > merchant.lastUpdated.toISOString()) {
                   //Update
                   console.log("on fait l'update\n" + element.firstName);
                   toUpdate.push(element);
-                } else if(element.lastUpdated < merchant.lastUpdated.toISOString()){
+                  if (element.pictureFileName!=null && merchant.pictureFileName !== element.pictureFileName)
+                    picToUpload.push(element.id);
+                }
+                //Si l'élément envoyé est plus vieux, on envoie au client les modifications
+                else if(element.lastUpdated < merchant.lastUpdated.toISOString()){
                   //Recupérer l'objet dans une liste
                   console.log("on garde\n" + merchant.firstName);
                   clientToUpdate.push(element);
+                    if (merchant.pictureFileName!=null && merchant.pictureFileName !== element.pictureFileName)
+                      picToDownload.push(merchant.id);
                 }
+                //Le marchand n'existe pas, on le crée
               } else {
                 //Faire un insert
                 console.log("on crée\n" + element.firstName);
                 toInsert.push(element);
+                console.log("-----DATE ET HEURE DE MODIF-------\n"+element.lastUpdated);
+                if (element.pictureFileName!=null)
+                  picToUpload.push(element.id);
               }
               i++;
               //Lorsque toutes les actions sont terminées
@@ -97,42 +133,13 @@ module.exports = function(Merchant) {
                     });
                   });
                 }
-
-                console.log("-----TO UPDATE--------\n"+JSON.stringify(toUpdate)+"\n---TO INSERT---\n"+JSON.stringify(toInsert)+"\n---TO PULL---\n"+JSON.stringify(clientToUpdate));
-                callback(null,clientToUpdate,clientToInsert,new Date().toISOString());
+                console.log("-----TO UPDATE--------\n"+JSON.stringify(toUpdate)+"\n---TO INSERT---\n"+JSON.stringify(toInsert)+"\n---TO PULL---\n"+JSON.stringify(clientToUpdate)
+                +"\n---PICTURES TO UPLOAD---\n"+JSON.stringify(picToUpload)+"\n---PICTURES TO DOWNLOAD---\n"+JSON.stringify(picToDownload));
+                callback(null,clientToUpdate,clientToInsert,picToUpload,picToDownload,new Date().toISOString());
               }
             });
           });
-
-
-
-
         });
-
-
-
-
-    /* Tentative de faire une recherche dans un array
-  let idList = [];
-  //On récupère les objets présent dans la liste
-    data.localChanges.forEach((merchant)=>{
-      idList.push(merchant.id);
-    });
-    let serverMerchantList = [];
-    let promise1 = new Promise (function (resolve,reject){
-      console.log("idList:\n"+idList);
-      Merchant.find({where:{id:{inq:["[\"cabc3a40-76f1-11e9-8f65-453b218fe36f\"]"]}}},function (response) {
-        console.log("recherche lancée : " +response);
-        resolve(response);
-      });
-    });
-
-    promise1.then((value)=>{
-      console.log("réponse de la recherche:\n"+value);
-    });
-*/
-
-
   };
 };
 
