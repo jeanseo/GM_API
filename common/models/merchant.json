@@ -55,32 +55,32 @@
           "arg": "data",
           "type": "object",
           "http": {
-            "source"
-          :  "body"},
+            "source": "body"
+          },
           "required": false,
           "description": "array de merchant"
         }
       ],
       "returns": [
         {
-        "arg" : "toUpdate",
-        "type" : "array"
+          "arg": "toUpdate",
+          "type": "array"
         },
         {
-          "arg" : "toInsert",
-          "type" : "array"
+          "arg": "toInsert",
+          "type": "array"
         },
         {
-          "arg" : "picToUpload",
-          "type" : "array"
+          "arg": "picToUpload",
+          "type": "array"
         },
         {
-          "arg" : "picToDownload",
-          "type" : "array"
+          "arg": "picToDownload",
+          "type": "array"
         },
         {
-          "arg" : "lastSync",
-          "type" : "string"
+          "arg": "lastSync",
+          "type": "string"
         }
       ],
       "description": "push for synchronization",

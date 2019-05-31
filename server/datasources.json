@@ -3,20 +3,20 @@
     "name": "db",
     "connector": "memory"
   },
-  "postgres": {
-    "host": "localhost",
-    "port": 5432,
-    "url": "",
-    "database": "viewstats",
-    "password": "Vs2019",
-    "name": "postgres",
-    "user": "postgres",
-    "connector": "postgresql"
-  },
   "photos": {
     "name": "photos",
     "connector": "loopback-component-storage",
     "provider": "filesystem",
     "root": "./common/assets"
+  },
+  "postgresOnline": {
+    "host": "",
+    "port": 0,
+    "url": "postgres://vnwslyvu:GP3bQ3fH9kKylkTwcOU8uRVMQf4wFmRA@manny.db.elephantsql.com:5432/vnwslyvu",
+    "database": "",
+    "password": "",
+    "name": "postgresOnline",
+    "user": "",
+    "connector": "postgresql"
   }
 }
