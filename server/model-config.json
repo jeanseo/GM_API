@@ -33,7 +33,7 @@
   },
   "Role": {
     "dataSource": "postgres",
-    "public": false
+  "public": false
   },
   "Merchant": {
     "dataSource": "postgres",
@@ -45,6 +45,10 @@
   },
   "container": {
     "dataSource": "photos",
+    "public": true
+  },
+  "agent": {
+    "dataSource": "postgres",
     "public": true
   }
 }
