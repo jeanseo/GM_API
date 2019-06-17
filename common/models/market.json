@@ -1,5 +1,5 @@
 {
-  "name": "Market",
+  "name": "market",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -15,8 +15,8 @@
   },
   "validations": [],
   "relations": {
-    "merchant_market": {
-      "type": "hasAndBelongsToMany",
+    "merchants": {
+      "type": "hasMany",
       "model": "Merchant",
       "foreignKey": "",
       "options": {
