@@ -33,13 +33,9 @@
   },
   "Role": {
     "dataSource": "postgres",
-  "public": false
+    "public": false
   },
   "Merchant": {
-    "dataSource": "postgres",
-    "public": true
-  },
-  "Market": {
     "dataSource": "postgres",
     "public": true
   },
@@ -48,6 +44,10 @@
     "public": true
   },
   "agent": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "market": {
     "dataSource": "postgres",
     "public": true
   }

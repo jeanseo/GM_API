@@ -39,7 +39,8 @@
       "type": "number"
     },
     "lastUpdated": {
-      "type": "date"
+      "type": "date",
+      "default": false
     },
     "deleted": {
       "type": "boolean"
