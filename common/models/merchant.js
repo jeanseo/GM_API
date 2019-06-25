@@ -109,7 +109,18 @@ module.exports = function(Merchant) {
     }
     callback(null,clientToUpdate,clientToInsert,picToUpload,picToDownload,new Date().toISOString());
   }
+
+  Merchant.avgincoming = async function (callback) {
+    //Requête qui va récupérer les revenus >0
+    const incomings = await Merchant.find({where: {and: [{incoming: {gt: 0}}, {deleted: false}]}, fields: {incoming: true}});
+    let total = 0;
+    incomings.forEach((incoming)=>{
+      console.log(incoming.incoming);
+      total+=incoming.incoming;
+    });
+    const avg = total / incomings.length;
+    console.log(total);
+    callback(null,avg);
+  };
 };
-
-
 

@@ -91,6 +91,24 @@
           "verb": "post"
         }
       ]
+    },
+    "avgincoming": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "averageIncoming",
+          "type": "number",
+          "root": false,
+          "description": "average incoming"
+        }
+      ],
+      "description": "get Average incoming",
+      "http": [
+        {
+          "path": "/avgincoming",
+          "verb": "get"
+        }
+      ]
     }
   }
 }
