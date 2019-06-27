@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-  let User = app.models.agent;
+  let User = app.models.User;
   let Role = app.models.Role;
   let RoleMapping = app.models.RoleMapping;
 
