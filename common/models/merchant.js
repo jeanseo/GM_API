@@ -108,7 +108,7 @@ module.exports = function(Merchant) {
       console.log("upsert terminé");
     }
     callback(null,clientToUpdate,clientToInsert,picToUpload,picToDownload,new Date().toISOString());
-  }
+  };
 
   Merchant.avgincoming = async function (callback) {
     //Requête qui va récupérer les revenus >0
@@ -122,5 +122,31 @@ module.exports = function(Merchant) {
     console.log(total);
     callback(null,avg);
   };
+
+  Merchant.incomingsCharts = async function (callback) {
+    const min = 0;
+    const maxResult = await Merchant.find({where: {and: [{incoming: {gt: 0}}, {deleted: false}]},order: 'incoming DESC' , limit: 1 , fields: {incoming: true}});
+    let categoriesNumber = 4;
+    let max=maxResult[0].incoming;
+    console.log ("revenueMax "+JSON.stringify(max));
+    let stats=[];
+
+    for (let i=0; i<categoriesNumber;i++){
+      const minValue = (max-min)/categoriesNumber*i;
+      const maxValue = (max-min)/categoriesNumber*(i+1);
+      console.log("min "+minValue+"max "+maxValue);
+      const merchants = await Merchant.find({where: {and: [{incoming: {gt: minValue}},{incoming: {lte: maxValue}}, {deleted: false}]}, fields: {incoming: true}});
+      stats[i] = {
+        range : maxValue,
+        value: merchants.length
+      };
+
+    }
+
+
+    //On récupère la valeur max
+    callback(null,stats);
+
+  }
 };
 

@@ -109,6 +109,26 @@
           "verb": "get"
         }
       ]
+    },
+    "incomingsCharts": {
+      "accepts": [
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "array",
+          "root": false,
+          "description": "result array"
+        }
+      ],
+      "description": "get incoming statistics",
+      "http": [
+        {
+          "path": "/incomingcharts",
+          "verb": "get"
+        }
+      ]
     }
+
   }
 }
