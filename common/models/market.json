@@ -1,0 +1,29 @@
+{
+  "name": "market",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "merchants": {
+      "type": "hasMany",
+      "model": "Merchant",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -39,7 +39,8 @@
       "type": "number"
     },
     "lastUpdated": {
-      "type": "date"
+      "type": "date",
+      "default": false
     },
     "deleted": {
       "type": "boolean"
@@ -90,6 +91,63 @@
           "verb": "post"
         }
       ]
+    },
+    "avgincoming": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "averageIncoming",
+          "type": "number",
+          "root": false,
+          "description": "average incoming"
+        }
+      ],
+      "description": "get Average incoming",
+      "http": [
+        {
+          "path": "/avgincoming",
+          "verb": "get"
+        }
+      ]
+    },
+    "incomingsCharts": {
+      "accepts": [
+      ],
+      "returns": [
+        {
+          "arg": "result",
+          "type": "array",
+          "root": false,
+          "description": "result array"
+        }
+      ],
+      "description": "get incoming statistics",
+      "http": [
+        {
+          "path": "/incomingcharts",
+          "verb": "get"
+        }
+      ]
+    },
+    "createList": {
+      "accepts": [
+      ],
+      "returns": [
+        {
+          "arg": "success",
+          "type": "boolean",
+          "root": false,
+          "description": "success"
+        }
+      ],
+      "description": "get incoming statistics",
+      "http": [
+        {
+          "path": "/createList",
+          "verb": "post"
+        }
+      ]
     }
+
   }
 }

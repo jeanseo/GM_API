@@ -14,33 +14,41 @@
     ]
   },
   "User": {
-    "dataSource": "postgresOnline"
+    "dataSource": "postgres"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "postgres",
     "public": false
   },
   "Merchant": {
-    "dataSource": "postgresOnline",
+    "dataSource": "postgres",
     "public": true
   },
   "container": {
     "dataSource": "photos",
+    "public": true
+  },
+  "agent": {
+    "dataSource": "postgres",
+    "public": true
+  },
+  "market": {
+    "dataSource": "postgres",
     "public": true
   }
 }
