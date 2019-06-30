@@ -128,6 +128,25 @@
           "verb": "get"
         }
       ]
+    },
+    "createList": {
+      "accepts": [
+      ],
+      "returns": [
+        {
+          "arg": "success",
+          "type": "boolean",
+          "root": false,
+          "description": "success"
+        }
+      ],
+      "description": "get incoming statistics",
+      "http": [
+        {
+          "path": "/createList",
+          "verb": "post"
+        }
+      ]
     }
 
   }
